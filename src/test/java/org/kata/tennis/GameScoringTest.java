@@ -15,11 +15,11 @@ public class GameScoringTest {
         game.pointWonBy(Player.PLAYER_1);
         game.pointWonBy(Player.PLAYER_1);
 
-        int pointsBefore = game.getPointsPlayer1();
+        int pointsBefore = game.getGameScorePlayer1();
 
         // Act
         game.pointWonBy(Player.PLAYER_1);
-        int pointsAfter = game.getPointsPlayer1();
+        int pointsAfter = game.getGameScorePlayer1();
         int difference = pointsAfter - pointsBefore;
 
         // Assert
@@ -31,10 +31,9 @@ public class GameScoringTest {
         // Arrange
         Game game = new Game();
 
-        game.pointWonBy(Player.PLAYER_1);
-        game.pointWonBy(Player.PLAYER_1);
-        game.pointWonBy(Player.PLAYER_1);
-        game.pointWonBy(Player.PLAYER_1);
+        for (int i=0; i<4; i++) {
+            game.pointWonBy(Player.PLAYER_1);
+        }
 
         // Act
         int scorePlayer1 = game.getPointsPlayer1();
