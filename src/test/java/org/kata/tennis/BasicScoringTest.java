@@ -66,4 +66,16 @@ public class BasicScoringTest {
         assertEquals("deuce",  result);
     }
 
+    @Test
+    public void on4_3ShouldReturnAdvantagePlayer1() {
+        // Arrange
+        Score score = new Score(4, 3);
+
+        // Act
+        String result = score.toString();
+
+        // Assert
+        assertEquals("advantage player 1",  result);
+    }
+
 }
