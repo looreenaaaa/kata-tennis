@@ -37,9 +37,11 @@ public class GameScoringTest {
         game.pointWonBy(Player.PLAYER_1);
 
         // Act
-        int score = game.getPointsPlayer1();
+        int scorePlayer1 = game.getPointsPlayer1();
+        int scorePlayer2 = game.getPointsPlayer2();
 
         // Assert
-        assertEquals(0, score);
+        assertEquals(0, scorePlayer1);
+        assertEquals(0, scorePlayer2);
     }
 }
