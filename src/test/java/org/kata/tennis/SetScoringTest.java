@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SetScoringTest {
 
     @Test
-    public void player1WinsSetAt6_0() {
+    public void newSetShouldStartWithZeroGames() {
+        Set set = new Set();
+        assertEquals(0, set.getGames(Player.PLAYER_1));
+        assertEquals(0, set.getGames(Player.PLAYER_2));
     }
 }
