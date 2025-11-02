@@ -11,7 +11,11 @@ public class Score {
 
     @Override
     public String toString() {
-        return translateSingleScore(this.scorePlayer1) + "-" + translateSingleScore(this.scorePlayer2);
+        if (isDeucePhase(this.scorePlayer1, this.scorePlayer2)) {
+            return translateDeucePhase(this.scorePlayer1, this.scorePlayer2);
+        } else {
+            return translateSingleScore(this.scorePlayer1) + "-" + translateSingleScore(this.scorePlayer2);
+        }
     }
 
     private static String translateSingleScore(int score) {
@@ -20,6 +24,17 @@ public class Score {
         else if (score == 1) result = "fifteen";
         else if (score == 2) result = "thirty";
         else if (score == 3) result = "forty";
+        return result;
+    }
+
+    private static boolean isDeucePhase(int scorePlayer1, int scorePlayer2) {
+        return scorePlayer1 >= 3 && scorePlayer2 >= 3;
+    }
+
+    private static String translateDeucePhase(int scorePlayer1, int scorePlayer2) {
+        String result = "";
+        int scoreDifference = scorePlayer1 - scorePlayer2;
+        if (scoreDifference == 0) result = "deuce";
         return result;
     }
 }
