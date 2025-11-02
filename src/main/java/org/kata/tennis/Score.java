@@ -41,4 +41,20 @@ public class Score {
         else if (scoreDifference == -2) result = "player 2 wins";
         return result;
     }
+
+    public int getScorePlayer1() {
+        return scorePlayer1;
+    }
+
+    public int getScorePlayer2() {
+        return scorePlayer2;
+    }
+
+    public void incrementPlayer1() {
+        this.scorePlayer1++;
+    }
+
+    public void incrementPlayer2() {
+        this.scorePlayer2++;
+    }
 }
