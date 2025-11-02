@@ -18,4 +18,16 @@ public class BasicScoringTest {
         assertEquals("love-love",  result);
     }
 
+    @Test
+    public void on1_0ShouldReturnFifteenLove() {
+        // Arrange
+        Score score = new Score(1, 0);
+
+        // Act
+        String result = score.toString();
+
+        // Assert
+        assertEquals("fifteen-love",  result);
+    }
+
 }
