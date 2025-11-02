@@ -36,6 +36,7 @@ public class Score {
         int scoreDifference = scorePlayer1 - scorePlayer2;
         if (scoreDifference == 0) result = "deuce";
         else if (scoreDifference == 1) result = "advantage player 1";
+        else if (scoreDifference == -1) result = "advantage player 2";
         return result;
     }
 }
