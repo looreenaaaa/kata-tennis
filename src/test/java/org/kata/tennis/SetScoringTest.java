@@ -18,4 +18,12 @@ public class SetScoringTest {
         Set set = new Set();
         assertNull(set.getWinner());
     }
+
+    @Test
+    public void correctlyAddsGameToPlayer1() {
+        Set set = new Set();
+        set.addGame(Player.PLAYER_1);
+        assertEquals(1, set.getGames(Player.PLAYER_1));
+        assertEquals(0, set.getGames(Player.PLAYER_2));
+    }
 }
