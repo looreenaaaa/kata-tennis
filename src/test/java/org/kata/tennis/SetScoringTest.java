@@ -33,4 +33,14 @@ public class SetScoringTest {
         for (int i=0; i<6;i++) set.addGame(Player.PLAYER_1);
         assertEquals(Player.PLAYER_1, set.getWinner());
     }
+
+    @Test
+    public void tiebreakAt6_6() {
+        Set set = new Set();
+        for (int i=0; i<6; i++) {
+            set.addGame(Player.PLAYER_1);
+            set.addGame(Player.PLAYER_2);
+        }
+        assertTrue(set.isTiebreak());
+    }
 }
