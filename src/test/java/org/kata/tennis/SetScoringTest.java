@@ -26,4 +26,11 @@ public class SetScoringTest {
         assertEquals(1, set.getGames(Player.PLAYER_1));
         assertEquals(0, set.getGames(Player.PLAYER_2));
     }
+
+    @Test
+    public void on6_0Player1ShouldWinSet() {
+        Set set = new Set();
+        for (int i=0; i<6;i++) set.addGame(Player.PLAYER_1);
+        assertEquals(Player.PLAYER_1, set.getWinner());
+    }
 }
