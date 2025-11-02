@@ -37,6 +37,7 @@ public class Score {
         if (scoreDifference == 0) result = "deuce";
         else if (scoreDifference == 1) result = "advantage player 1";
         else if (scoreDifference == -1) result = "advantage player 2";
+        else if (scoreDifference == 2) result = "player 1 wins";
         return result;
     }
 }
