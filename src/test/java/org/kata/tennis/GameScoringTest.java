@@ -25,4 +25,21 @@ public class GameScoringTest {
         // Assert
         assertEquals(1,  difference);
     }
+
+    @Test
+    public void after4_0ShouldResetScore() {
+        // Arrange
+        Game game = new Game();
+
+        game.pointWonBy(Player.PLAYER_1);
+        game.pointWonBy(Player.PLAYER_1);
+        game.pointWonBy(Player.PLAYER_1);
+        game.pointWonBy(Player.PLAYER_1);
+
+        // Act
+        int score = game.getPointsPlayer1();
+
+        // Assert
+        assertEquals(0, score);
+    }
 }
