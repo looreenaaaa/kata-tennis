@@ -19,6 +19,7 @@ public class Score {
         if (score == 0) result = "love";
         else if (score == 1) result = "fifteen";
         else if (score == 2) result = "thirty";
+        else if (score == 3) result = "forty";
         return result;
     }
 }
