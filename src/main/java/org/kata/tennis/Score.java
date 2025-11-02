@@ -9,6 +9,11 @@ public class Score {
         this.scorePlayer2 = scorePlayer2;
     }
 
+    public void pointWonBy(Player player) {
+        if (player == Player.PLAYER_1) scorePlayer1++;
+        else scorePlayer2++;
+    }
+
     @Override
     public String toString() {
         if (isDeucePhase(this.scorePlayer1, this.scorePlayer2)) {
@@ -48,14 +53,6 @@ public class Score {
 
     public int getScorePlayer2() {
         return scorePlayer2;
-    }
-
-    public void incrementPlayer1() {
-        this.scorePlayer1++;
-    }
-
-    public void incrementPlayer2() {
-        this.scorePlayer2++;
     }
 
     public void resetScore() {

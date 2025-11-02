@@ -14,8 +14,7 @@ public class Game {
     }
 
     public void pointWonBy(Player player) {
-        if (player == Player.PLAYER_1) score.incrementPlayer1();
-        else score.incrementPlayer2();
+        score.pointWonBy(player);
         checkFinish();
     }
 
@@ -27,12 +26,11 @@ public class Game {
             this.finished = true;
             if (Math.max(scorePlayer1, scorePlayer2) == scorePlayer1) {
                 this.gameWinner = Player.PLAYER_1;
-                addGameScore();
             }
             else {
                 this.gameWinner = Player.PLAYER_2;
-                addGameScore();
             }
+            addGameScore();
             score.resetScore();
         }
     }

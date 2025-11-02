@@ -10,11 +10,7 @@ public class GameScoringTest {
     public void on4_0ShouldAdd1ToGameScorePlayer1() {
         // Arrange
         Game game = new Game();
-
-        game.pointWonBy(Player.PLAYER_1);
-        game.pointWonBy(Player.PLAYER_1);
-        game.pointWonBy(Player.PLAYER_1);
-
+        play3_0(game);
         int pointsBefore = game.getGameScorePlayer1();
 
         // Act
@@ -30,10 +26,8 @@ public class GameScoringTest {
     public void after4_0ShouldResetScore() {
         // Arrange
         Game game = new Game();
-
-        for (int i=0; i<4; i++) {
-            game.pointWonBy(Player.PLAYER_1);
-        }
+        play3_0(game);
+        game.pointWonBy(Player.PLAYER_1);
 
         // Act
         int scorePlayer1 = game.getPointsPlayer1();
@@ -42,5 +36,11 @@ public class GameScoringTest {
         // Assert
         assertEquals(0, scorePlayer1);
         assertEquals(0, scorePlayer2);
+    }
+
+    private void play3_0(Game game) {
+        for (int i=0; i<3; i++) {
+            game.pointWonBy(Player.PLAYER_1);
+        }
     }
 }
