@@ -38,6 +38,7 @@ public class Score {
         else if (scoreDifference == 1) result = "advantage player 1";
         else if (scoreDifference == -1) result = "advantage player 2";
         else if (scoreDifference == 2) result = "player 1 wins";
+        else if (scoreDifference == -2) result = "player 2 wins";
         return result;
     }
 }
