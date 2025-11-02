@@ -17,6 +17,7 @@ public class Score {
     private static String translateSingleScore(int score) {
         String result = "";
         if (score == 0) result = "love";
+        else if (score == 1) result = "fifteen";
         return result;
     }
 }
