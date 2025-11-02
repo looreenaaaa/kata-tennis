@@ -30,4 +30,16 @@ public class BasicScoringTest {
         assertEquals("fifteen-love",  result);
     }
 
+    @Test
+    public void on2_1ShouldReturnThirtyFifteen() {
+        // Arrange
+        Score score = new Score(2, 1);
+
+        // Act
+        String result = score.toString();
+
+        // Assert
+        assertEquals("thirty-fifteen",  result);
+    }
+
 }
