@@ -42,4 +42,22 @@ public class GameScoringTest {
         assertTrue(game.isFinished());
         assertEquals(Player.PLAYER_1, game.getWinner());
     }
+
+    @Test
+    public void after4_0ShouldResetScore() {
+        // Arrange
+        Game game = new Game();
+        for (int i=0; i<4; i++) game.pointWonBy(Player.PLAYER_1);
+
+        // Act
+        game.reset();
+        int scorePlayer1 = game.getPoints(Player.PLAYER_1);
+        int scorePlayer2 = game.getPoints(Player.PLAYER_2);
+
+        // Assert
+        assertFalse(game.isFinished());
+        assertNull(game.getWinner());
+        assertEquals(0, scorePlayer1);
+        assertEquals(0, scorePlayer2);
+    }
 }
