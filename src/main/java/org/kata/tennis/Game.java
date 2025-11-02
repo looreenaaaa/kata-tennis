@@ -29,4 +29,9 @@ public class Game {
         else return score.getScorePlayer2();
     }
 
+    public void reset() {
+        score.resetScore();
+        gameWinner = null;
+    }
+
 }
