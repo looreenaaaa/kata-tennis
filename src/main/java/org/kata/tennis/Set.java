@@ -25,11 +25,12 @@ public class Set {
     }
 
     public void addGame(Player gameWinner) {
-        if (gameWinner == Player.PLAYER_1) games[0]++;
-        else games[1]++;
-
-        checkTieBreak();
-        checkSetWinner();
+        if (!tiebreak) {
+            if (gameWinner == Player.PLAYER_1) games[0]++;
+            else games[1]++;
+            checkTieBreak();
+            checkSetWinner();
+        }
     }
 
     public void pointWonInTiebreak(Player player) {
