@@ -24,12 +24,9 @@ public class Game {
         return gameWinner != null;
     }
 
-    public int getPointsPlayer1() {
-        return score.getScorePlayer1();
-    }
-
-    public int getPointsPlayer2() {
-        return score.getScorePlayer2();
+    public int getPoints(Player player) {
+        if (player == Player.PLAYER_1) return score.getScorePlayer1();
+        else return score.getScorePlayer2();
     }
 
 }

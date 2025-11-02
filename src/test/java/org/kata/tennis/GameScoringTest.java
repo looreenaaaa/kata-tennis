@@ -2,52 +2,44 @@ package org.kata.tennis;
 
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameScoringTest {
 
     @Test
     public void newGameShouldStartWith0Points() {
         Game game = new Game();
-        assertEquals(0, game.getPointsPlayer1());
-        assertEquals(0, game.getPointsPlayer2());
+        assertEquals(0, game.getPoints(Player.PLAYER_1));
+        assertEquals(0, game.getPoints(Player.PLAYER_2));
     }
 
     @Test
-    public void on4_0ShouldAdd1ToGameScorePlayer1() {
-        // Arrange
+    public void newGameShouldStartWithNoWinner() {
         Game game = new Game();
-        play3_0(game);
-        int pointsBefore = game.getPointsPlayer1();
-
-        // Act
-        game.pointWonBy(Player.PLAYER_1);
-        int pointsAfter = game.getPointsPlayer1();
-        int difference = pointsAfter - pointsBefore;
-
-        // Assert
-        assertEquals(1,  difference);
+        assertNull(game.getWinner());
     }
 
     @Test
-    public void after4_0ShouldResetScore() {
-        // Arrange
+    public void pointWonByPlayer1ShouldIncreaseScore() {
         Game game = new Game();
-        play3_0(game);
         game.pointWonBy(Player.PLAYER_1);
-
-        // Act
-        int scorePlayer1 = game.getPointsPlayer1();
-        int scorePlayer2 = game.getPointsPlayer2();
-
-        // Assert
-        assertEquals(0, scorePlayer1);
-        assertEquals(0, scorePlayer2);
+        assertEquals(1, game.getPoints(Player.PLAYER_1));
+        assertEquals(0, game.getPoints(Player.PLAYER_2));
     }
 
-    private void play3_0(Game game) {
-        for (int i=0; i<3; i++) {
-            game.pointWonBy(Player.PLAYER_1);
-        }
+    @Test
+    public void pointWonByPlayer2ShouldIncreaseScore() {
+        Game game = new Game();
+        game.pointWonBy(Player.PLAYER_2);
+        assertEquals(0, game.getPoints(Player.PLAYER_1));
+        assertEquals(1, game.getPoints(Player.PLAYER_2));
+    }
+
+    @Test
+    public void on4_0Player1ShouldWin() {
+        Game game = new Game();
+        for (int i=0; i<4; i++) game.pointWonBy(Player.PLAYER_1);
+        assertTrue(game.isFinished());
+        assertEquals(Player.PLAYER_1, game.getWinner());
     }
 }
