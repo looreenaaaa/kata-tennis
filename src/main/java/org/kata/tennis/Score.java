@@ -35,6 +35,7 @@ public class Score {
         String result = "";
         int scoreDifference = scorePlayer1 - scorePlayer2;
         if (scoreDifference == 0) result = "deuce";
+        else if (scoreDifference == 1) result = "advantage player 1";
         return result;
     }
 }
