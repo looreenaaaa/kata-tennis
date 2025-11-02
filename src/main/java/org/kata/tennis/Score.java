@@ -18,6 +18,7 @@ public class Score {
         String result = "";
         if (score == 0) result = "love";
         else if (score == 1) result = "fifteen";
+        else if (score == 2) result = "thirty";
         return result;
     }
 }
