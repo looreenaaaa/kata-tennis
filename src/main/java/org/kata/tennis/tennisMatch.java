@@ -34,7 +34,4 @@ public class tennisMatch {
         return matchFinished;
     }
 
-    public Set getSet() {
-        return set;
-    }
 }

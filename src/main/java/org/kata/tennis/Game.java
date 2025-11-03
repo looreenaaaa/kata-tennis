@@ -49,7 +49,7 @@ public class Game {
                 gamePointsPlayer1++;
                 gameWinner = Player.PLAYER_1;
             }
-            else {
+            else if (player2Score > player1Score){
                 gamePointsPlayer2++;
                 gameWinner = Player.PLAYER_2;
             }
@@ -59,7 +59,7 @@ public class Game {
 
     public void tiebreakPointWonBy(Player player) {
         if (player == Player.PLAYER_1) tiebreakPointsPlayer1++;
-        else tiebreakPointsPlayer2++;
+        else if (player == Player.PLAYER_2) tiebreakPointsPlayer2++;
     }
 
     public int getTiebreakPointsPlayer1() {
@@ -79,19 +79,14 @@ public class Game {
     }
 
     public int getGamePoints(Player player) {
-        if (player == Player.PLAYER_1) return gamePointsPlayer1;
-        else return gamePointsPlayer2;
-    }
-
-    public void reset() {
-        score.resetScore();
-        gameWinner = null;
+        int result = 0;
+        if (player == Player.PLAYER_1) result = gamePointsPlayer1;
+        else if (player == Player.PLAYER_2) result = gamePointsPlayer2;
+        return result;
     }
 
     public Score getScore() {
         return score;
     }
-
-
 
 }

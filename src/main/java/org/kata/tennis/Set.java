@@ -26,12 +26,14 @@ public class Set {
     }
 
     public int getSets(Player player) {
-        if (player == Player.PLAYER_1) return setPointsPlayer1;
-        else return setPointsPlayer2;
+        int result = 0;
+        if (player == Player.PLAYER_1) result = setPointsPlayer1;
+        else if (player == Player.PLAYER_2) result = setPointsPlayer2;
+        return result;
     }
 
     public Player getSetWinner() {
-        return this.setWinner;
+        return setWinner;
     }
 
     public void gameWonBy(Player player) {

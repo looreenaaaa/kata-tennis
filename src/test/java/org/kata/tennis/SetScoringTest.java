@@ -9,6 +9,7 @@ public class SetScoringTest {
     @Test
     public void newSetShouldStartWithZeroGames() {
         Set set = new Set();
+
         assertEquals(0, set.getGame().getGamePoints(Player.PLAYER_1));
         assertEquals(0, set.getGame().getGamePoints(Player.PLAYER_2));
     }
@@ -16,6 +17,7 @@ public class SetScoringTest {
     @Test
     public void newSetShouldStartWithNoWinner() {
         Set set = new Set();
+
         assertNull(set.getSetWinner());
     }
 
@@ -52,7 +54,5 @@ public class SetScoringTest {
         assertTrue(set.isFinished());
         assertEquals(1, set.getSets(Player.PLAYER_1));
     }
-
-
 
 }

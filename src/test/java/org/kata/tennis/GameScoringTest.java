@@ -9,6 +9,7 @@ public class GameScoringTest {
     @Test
     public void newGameShouldStartWith0Points() {
         Game game = new Game();
+
         assertEquals(0, game.getGamePoints(Player.PLAYER_1));
         assertEquals(0, game.getGamePoints(Player.PLAYER_2));
     }
@@ -16,6 +17,7 @@ public class GameScoringTest {
     @Test
     public void newGameShouldStartWithNoWinner() {
         Game game = new Game();
+
         assertNull(game.getWinner());
     }
 
@@ -23,7 +25,9 @@ public class GameScoringTest {
     public void pointWonByPlayer1ShouldIncreaseScore() {
         Score score = new Score(3,0);
         Game game = new Game(score, 0,0);
+
         game.pointWonBy(Player.PLAYER_1);
+
         assertEquals(1, game.getGamePoints(Player.PLAYER_1));
         assertEquals(0, game.getGamePoints(Player.PLAYER_2));
     }
@@ -32,7 +36,9 @@ public class GameScoringTest {
     public void pointWonByPlayer2ShouldIncreaseScore() {
         Score score = new Score(0,3);
         Game game = new Game(score, 0,0);
+
         game.pointWonBy(Player.PLAYER_2);
+
         assertEquals(0, game.getGamePoints(Player.PLAYER_1));
         assertEquals(1, game.getGamePoints(Player.PLAYER_2));
     }
@@ -55,11 +61,9 @@ public class GameScoringTest {
 
         game.pointWonBy(Player.PLAYER_1);
 
-        // Act
         int scorePlayer1 = game.getScore().getScorePlayer1();
         int scorePlayer2 = game.getScore().getScorePlayer2();
 
-        // Assert
         assertEquals(0, scorePlayer1);
         assertEquals(0, scorePlayer2);
     }
