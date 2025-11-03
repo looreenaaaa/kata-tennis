@@ -28,4 +28,17 @@ public class MatchWinningTest {
         assertTrue(match.isFinished());
     }
 
+    @Test
+    public void player2WinsAt2_3Sets() {
+        Score score = new Score(0,3);
+        Game game = new Game(score, 4,5);
+        Set set = new Set(2,2, game);
+        tennisMatch match = new tennisMatch(set);
+
+        match.setWonBy(Player.PLAYER_2);
+
+        assertEquals(Player.PLAYER_2, match.getWinner());
+        assertTrue(match.isFinished());
+    }
+
 }
