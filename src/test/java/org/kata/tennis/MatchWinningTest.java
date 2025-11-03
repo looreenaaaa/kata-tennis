@@ -10,5 +10,6 @@ public class MatchWinningTest {
     public void matchShouldInitializeCorrectly() {
         tennisMatch match = new tennisMatch();
         assertNull(match.getWinner());
+        assertFalse(match.isFinished());
     }
 }
