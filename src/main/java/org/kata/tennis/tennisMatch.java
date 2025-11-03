@@ -10,4 +10,8 @@ public class tennisMatch {
     public Player getWinner() {
         return winner;
     }
+
+    public boolean isFinished() {
+        return winner != null;
+    }
 }
