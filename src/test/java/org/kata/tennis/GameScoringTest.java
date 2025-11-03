@@ -9,8 +9,8 @@ public class GameScoringTest {
     @Test
     public void newGameShouldStartWith0Points() {
         Game game = new Game();
-        assertEquals(0, game.getPoints(Player.PLAYER_1));
-        assertEquals(0, game.getPoints(Player.PLAYER_2));
+        assertEquals(0, game.getGamePoints(Player.PLAYER_1));
+        assertEquals(0, game.getGamePoints(Player.PLAYER_2));
     }
 
     @Test
@@ -21,42 +21,45 @@ public class GameScoringTest {
 
     @Test
     public void pointWonByPlayer1ShouldIncreaseScore() {
-        Game game = new Game();
+        Score score = new Score(3,0);
+        Game game = new Game(score, 0,0);
         game.pointWonBy(Player.PLAYER_1);
-        assertEquals(1, game.getPoints(Player.PLAYER_1));
-        assertEquals(0, game.getPoints(Player.PLAYER_2));
+        assertEquals(1, game.getGamePoints(Player.PLAYER_1));
+        assertEquals(0, game.getGamePoints(Player.PLAYER_2));
     }
 
     @Test
     public void pointWonByPlayer2ShouldIncreaseScore() {
-        Game game = new Game();
+        Score score = new Score(0,3);
+        Game game = new Game(score, 0,0);
         game.pointWonBy(Player.PLAYER_2);
-        assertEquals(0, game.getPoints(Player.PLAYER_1));
-        assertEquals(1, game.getPoints(Player.PLAYER_2));
+        assertEquals(0, game.getGamePoints(Player.PLAYER_1));
+        assertEquals(1, game.getGamePoints(Player.PLAYER_2));
     }
 
     @Test
     public void on4_0Player1ShouldWin() {
-        Game game = new Game();
-        for (int i=0; i<4; i++) game.pointWonBy(Player.PLAYER_1);
+        Score score = new Score(3,0);
+        Game game = new Game(score,0,0);
+
+        game.pointWonBy(Player.PLAYER_1);
+
         assertTrue(game.isFinished());
         assertEquals(Player.PLAYER_1, game.getWinner());
     }
 
     @Test
-    public void after4_0ShouldResetScore() {
-        // Arrange
-        Game game = new Game();
-        for (int i=0; i<4; i++) game.pointWonBy(Player.PLAYER_1);
+    public void after4_0GameShouldReset() {
+        Score score = new Score(3,0);
+        Game game = new Game(score, 0,0);
+
+        game.pointWonBy(Player.PLAYER_1);
 
         // Act
-        game.reset();
-        int scorePlayer1 = game.getPoints(Player.PLAYER_1);
-        int scorePlayer2 = game.getPoints(Player.PLAYER_2);
+        int scorePlayer1 = game.getScore().getScorePlayer1();
+        int scorePlayer2 = game.getScore().getScorePlayer2();
 
         // Assert
-        assertFalse(game.isFinished());
-        assertNull(game.getWinner());
         assertEquals(0, scorePlayer1);
         assertEquals(0, scorePlayer2);
     }

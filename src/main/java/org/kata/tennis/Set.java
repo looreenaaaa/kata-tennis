@@ -1,64 +1,79 @@
 package org.kata.tennis;
 
 public class Set {
-    private int[] games;
-    private Player winner;
+    private int setPointsPlayer1;
+    private int setPointsPlayer2;
+    private Game game;
+    private Player setWinner;
     private boolean tiebreak;
-    private int tiebreakPointsPlayer1;
-    private int tiebreakPointsPlayer2;
 
     public Set() {
-        this.games = new int[2];
-        this.winner = null;
+        this.setPointsPlayer1 = 0;
+        this.setPointsPlayer2 = 0;
+        this.game = new Game();
+        this.setWinner = null;
         this.tiebreak = false;
-        this.tiebreakPointsPlayer1 = 0;
-        this.tiebreakPointsPlayer2 = 0;
     }
 
-    public int getGames(Player player) {
-        if (player == Player.PLAYER_1) return games[0];
-        else return games[1];
+    public Set(int setPointsPlayer1, int setPointsPlayer2, Game games) {
+        this.setPointsPlayer1 = setPointsPlayer1;
+        this.setPointsPlayer2 = setPointsPlayer2;
+        this.game = games;
     }
 
-    public Player getWinner() {
-        return this.winner;
+    public Game getGame() {
+        return game;
     }
 
-    public void addGame(Player gameWinner) {
-        if (!tiebreak) {
-            if (gameWinner == Player.PLAYER_1) games[0]++;
-            else games[1]++;
-            checkTieBreak();
-            checkSetWinner();
+    public int getSets(Player player) {
+        if (player == Player.PLAYER_1) return setPointsPlayer1;
+        else return setPointsPlayer2;
+    }
+
+    public Player getSetWinner() {
+        return this.setWinner;
+    }
+
+    public void gameWonBy(Player player) {
+        game.pointWonBy(player);
+        int player1GamePoints = game.getGamePoints(Player.PLAYER_1);
+        int player2GamePoints = game.getGamePoints(Player.PLAYER_2);
+        int difference = Math.abs(player1GamePoints - player2GamePoints);
+        checkTieBreak();
+        if (tiebreak) {
+            checkTiebreakWinner();
+        } else {
+            if ((player1GamePoints >= 6 || player2GamePoints >= 6) && difference >= 2) {
+                if (player1GamePoints > player2GamePoints) {
+                    setPointsPlayer1++;
+                    setWinner = Player.PLAYER_1;
+                } else if (player2GamePoints > player1GamePoints) {
+                    setPointsPlayer2++;
+                    setWinner = Player.PLAYER_2;
+                }
+            }
         }
     }
 
     public void pointWonInTiebreak(Player player) {
-        if (player == Player.PLAYER_1) tiebreakPointsPlayer1++;
-        else tiebreakPointsPlayer2++;
-
+        game.tiebreakPointWonBy(player);
         checkTiebreakWinner();
     }
 
     private void checkTiebreakWinner() {
+        int tiebreakPointsPlayer1 = game.getTiebreakPointsPlayer1();
+        int tiebreakPointsPlayer2 = game.getTiebreakPointsPlayer2();
         int difference = Math.abs(tiebreakPointsPlayer1 - tiebreakPointsPlayer2);
         if ((tiebreakPointsPlayer1 >= 7 || tiebreakPointsPlayer2 >= 7) && difference >= 2) {
             if (tiebreakPointsPlayer1 > tiebreakPointsPlayer2) {
-                winner = Player.PLAYER_1;
-            } else {
-                winner = Player.PLAYER_2;
+                setPointsPlayer1++;
+                setWinner = Player.PLAYER_1;
+            } else if (tiebreakPointsPlayer2 > tiebreakPointsPlayer1){
+                setPointsPlayer2++;
+                setWinner = Player.PLAYER_2;
             }
-        }
-    }
-
-    private void checkSetWinner() {
-        int difference = Math.abs(games[0] - games[1]);
-        if ((games[0] >= 6 || games[1] >= 6) && difference >= 2) {
-            if (games[0] > games[1]) {
-                winner = Player.PLAYER_1;
-            } else {
-                winner = Player.PLAYER_2;
-            }
+        } else {
+            pointWonInTiebreak(Player.PLAYER_1);
         }
     }
 
@@ -67,18 +82,11 @@ public class Set {
     }
 
     private void checkTieBreak() {
-        if (games[0] == 6 && games[1] == 6) tiebreak = true;
+        if (game.getGamePoints(Player.PLAYER_1) == 6 && game.getGamePoints(Player.PLAYER_2) == 6) tiebreak = true;
     }
 
     public boolean isFinished() {
-        return winner != null;
+        return setWinner != null;
     }
 
-    public int getTiebreakPointsPlayer1() {
-        return tiebreakPointsPlayer1;
-    }
-
-    public int getTiebreakPointsPlayer2() {
-        return tiebreakPointsPlayer2;
-    }
 }

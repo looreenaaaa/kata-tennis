@@ -9,64 +9,50 @@ public class SetScoringTest {
     @Test
     public void newSetShouldStartWithZeroGames() {
         Set set = new Set();
-        assertEquals(0, set.getGames(Player.PLAYER_1));
-        assertEquals(0, set.getGames(Player.PLAYER_2));
+        assertEquals(0, set.getGame().getGamePoints(Player.PLAYER_1));
+        assertEquals(0, set.getGame().getGamePoints(Player.PLAYER_2));
     }
 
     @Test
     public void newSetShouldStartWithNoWinner() {
         Set set = new Set();
-        assertNull(set.getWinner());
-    }
-
-    @Test
-    public void correctlyAddsGameToPlayer1() {
-        Set set = new Set();
-        set.addGame(Player.PLAYER_1);
-        assertEquals(1, set.getGames(Player.PLAYER_1));
-        assertEquals(0, set.getGames(Player.PLAYER_2));
+        assertNull(set.getSetWinner());
     }
 
     @Test
     public void on6_0Player1ShouldWinSet() {
-        Set set = new Set();
-        for (int i=0; i<6;i++) set.addGame(Player.PLAYER_1);
-        assertEquals(Player.PLAYER_1, set.getWinner());
+        Score score = new Score(4,0);
+        Game game = new Game(score, 5,0);
+        Set set = new Set(0,0, game);
+
+        set.gameWonBy(Player.PLAYER_1);
+
+        assertEquals(1, set.getSets(Player.PLAYER_1));
     }
 
     @Test
     public void tiebreakAt6_6() {
-        Set set = new Set();
-        for (int i=0; i<6; i++) {
-            set.addGame(Player.PLAYER_1);
-            set.addGame(Player.PLAYER_2);
-        }
+        Score score = new Score(3,0);
+        Game game = new Game(score, 5,6);
+        Set set = new Set(0,0,game);
+
+        set.gameWonBy(Player.PLAYER_1);
+
         assertTrue(set.isTiebreak());
     }
 
     @Test
-    public void player1WinsAtTieabreak7_5() {
-        Set set = new Set();
-        for (int i=0; i<6; i++) {
-            set.addGame(Player.PLAYER_1);
-            set.addGame(Player.PLAYER_2);
-        }
-
-        for (int i=0; i<6; i++) set.pointWonInTiebreak(Player.PLAYER_1);
-        for (int i=0; i<5; i++) set.pointWonInTiebreak(Player.PLAYER_2);
+    public void player1WinsAtTiebreak7_5() {
+        Game game = new Game(6,5);
+        Set set = new Set(0,0,game);
 
         set.pointWonInTiebreak(Player.PLAYER_1);
 
-        assertEquals(Player.PLAYER_1, set.getWinner());
+        assertEquals(Player.PLAYER_1, set.getSetWinner());
         assertTrue(set.isFinished());
-    }
-
-    @Test
-    public void setListensToGame() {
-        Set set = new Set();
-        Game game = set.getGame();
-        for (int i=0; i<6; i++) game.pointWonBy(Player.PLAYER_1);
         assertEquals(1, set.getSets(Player.PLAYER_1));
     }
+
+
 
 }

@@ -4,6 +4,11 @@ public class Score {
     private int scorePlayer1;
     private int scorePlayer2;
 
+    public Score() {
+        this.scorePlayer1 = 0;
+        this.scorePlayer2 = 0;
+    }
+
     public Score(int scorePlayer1, int scorePlayer2) {
         this.scorePlayer1 = scorePlayer1;
         this.scorePlayer2 = scorePlayer2;
@@ -16,11 +21,13 @@ public class Score {
 
     @Override
     public String toString() {
-        if (isDeucePhase(this.scorePlayer1, this.scorePlayer2)) {
-            return translateDeucePhase(this.scorePlayer1, this.scorePlayer2);
+        String result = "";
+        if (isDeucePhase(scorePlayer1, scorePlayer2)) {
+            result = translateDeucePhase(scorePlayer1, scorePlayer2);
         } else {
-            return translateSingleScore(this.scorePlayer1) + "-" + translateSingleScore(this.scorePlayer2);
+            result = translateSingleScore(scorePlayer1) + "-" + translateSingleScore(scorePlayer2);
         }
+        return result;
     }
 
     private static String translateSingleScore(int score) {
