@@ -61,4 +61,12 @@ public class SetScoringTest {
         assertTrue(set.isFinished());
     }
 
+    @Test
+    public void setListensToGame() {
+        Set set = new Set();
+        Game game = set.getGame();
+        for (int i=0; i<6; i++) game.pointWonBy(Player.PLAYER_1);
+        assertEquals(1, set.getSets(Player.PLAYER_1));
+    }
+
 }
