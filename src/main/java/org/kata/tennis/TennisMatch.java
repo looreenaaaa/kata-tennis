@@ -1,37 +1,37 @@
 package org.kata.tennis;
 
 public class TennisMatch {
-    private Set set;
+    private final Set currentSet;
     private Player winner;
     private boolean matchFinished;
 
-    public TennisMatch(Set set, Player winner) {
-        this.set = set;
-        this.winner = winner;
+    public TennisMatch(Set currentSet) {
+        this.currentSet = currentSet;
         this.matchFinished = false;
     }
 
-    public TennisMatch(Set set) {
-        this.set = set;
+    public void setWonBy(Player player) {
+        if (matchFinished) return;
+
+        currentSet.gameWonBy(player);
+
+        if (currentSet.isFinished()) {
+            checkMatchWinner();
+        }
     }
 
-    public void setWonBy(Player player) {
-        set.gameWonBy(player);
-        int setPointsPlayer1 = set.getSets(Player.PLAYER_1);
-        int setPointsPlayer2 = set.getSets(Player.PLAYER_2);
-        if (setPointsPlayer1 == 3 || setPointsPlayer2 == 3) {
-            if (setPointsPlayer1 == 3) winner = Player.PLAYER_1;
-            else winner = Player.PLAYER_2;
+    private void checkMatchWinner() {
+        int setsPlayer1 = currentSet.getSets(Player.PLAYER_1);
+        int setsPlayer2 = currentSet.getSets(Player.PLAYER_2);
+
+        if (setsPlayer1 == 3 || setsPlayer2 == 3) {
+            winner = setsPlayer1 == 3 ? Player.PLAYER_1 : Player.PLAYER_2;
             matchFinished = true;
         }
     }
 
-    public Player getWinner() {
-        return winner;
-    }
+    public Player getWinner() { return winner; }
 
-    public boolean isFinished() {
-        return matchFinished;
-    }
+    public boolean isFinished() { return matchFinished; }
 
 }

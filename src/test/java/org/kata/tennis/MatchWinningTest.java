@@ -41,4 +41,15 @@ public class MatchWinningTest {
         assertTrue(match.isFinished());
     }
 
+    @Test
+    public void notFinishedAt2_2Sets() {
+        Game game = new Game();
+        Set set = new Set(2,2, game);
+        TennisMatch match = new TennisMatch(set);
+
+        match.setWonBy(Player.PLAYER_2);
+
+        assertFalse(match.isFinished());
+    }
+
 }
