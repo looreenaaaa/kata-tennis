@@ -1,7 +1,7 @@
 package org.kata.tennis;
 
 public class Game {
-    private Score score;
+    private final Score score;
     private Player gameWinner;
     private int gamePointsPlayer1;
     private int gamePointsPlayer2;
@@ -41,20 +41,31 @@ public class Game {
 
     public void pointWonBy(Player player) {
         score.pointWonBy(player);
+        checkGameWinner();
+    }
+
+    private void checkGameWinner() {
         int player1Score = score.getScorePlayer1();
         int player2Score = score.getScorePlayer2();
         int difference = Math.abs(player1Score - player2Score);
-        if ((player1Score >= 4 || player2Score >= 4) && difference >= 2) {
-            if (player1Score > player2Score) {
-                gamePointsPlayer1++;
-                gameWinner = Player.PLAYER_1;
-            }
-            else if (player2Score > player1Score){
-                gamePointsPlayer2++;
-                gameWinner = Player.PLAYER_2;
-            }
-            score.resetScore();
+
+        if (isWinningScore(player1Score, player2Score) && difference >= 2) {
+            declareGameWinner(player1Score > player2Score ? Player.PLAYER_1 : Player.PLAYER_2);
         }
+    }
+
+    private void declareGameWinner(Player winner) {
+        gameWinner = winner;
+        if (winner == Player.PLAYER_1) {
+            gamePointsPlayer1++;
+        } else {
+            gamePointsPlayer2++;
+        }
+        score.resetScore();
+    }
+
+    private boolean isWinningScore(int scorePlayer1, int scorePlayer2) {
+        return scorePlayer1 >= 4 || scorePlayer2 >= 4;
     }
 
     public void tiebreakPointWonBy(Player player) {
@@ -63,10 +74,7 @@ public class Game {
     }
 
     public int getTiebreakPoints(Player player) {
-        int tiebreakPoints = 0;
-        if (player == Player.PLAYER_1) tiebreakPoints = tiebreakPointsPlayer1;
-        else if (player == Player.PLAYER_2) tiebreakPoints = tiebreakPointsPlayer2;
-        return tiebreakPoints;
+        return player == Player.PLAYER_1 ? tiebreakPointsPlayer1 : tiebreakPointsPlayer2;
     }
 
     public Player getWinner() {
@@ -78,10 +86,7 @@ public class Game {
     }
 
     public int getGamePoints(Player player) {
-        int result = 0;
-        if (player == Player.PLAYER_1) result = gamePointsPlayer1;
-        else if (player == Player.PLAYER_2) result = gamePointsPlayer2;
-        return result;
+        return player == Player.PLAYER_1 ? gamePointsPlayer1 : gamePointsPlayer2;
     }
 
     public Score getScore() {
