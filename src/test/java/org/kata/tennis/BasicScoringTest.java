@@ -114,4 +114,15 @@ public class BasicScoringTest {
         assertEquals("player 2 wins",  result);
     }
 
+    @Test
+    public void testDeuceToAdvantageToDeuce() {
+        Score score = new Score(3, 3);
+        score.pointWonBy(Player.PLAYER_1);
+        assertEquals("advantage player 1", score.toString());
+
+        score.pointWonBy(Player.PLAYER_2);
+
+        assertEquals("deuce", score.toString());
+    }
+
 }
