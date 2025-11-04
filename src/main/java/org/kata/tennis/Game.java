@@ -62,12 +62,11 @@ public class Game {
         else if (player == Player.PLAYER_2) tiebreakPointsPlayer2++;
     }
 
-    public int getTiebreakPointsPlayer1() {
-        return tiebreakPointsPlayer1;
-    }
-
-    public int getTiebreakPointsPlayer2() {
-        return tiebreakPointsPlayer2;
+    public int getTiebreakPoints(Player player) {
+        int tiebreakPoints = 0;
+        if (player == Player.PLAYER_1) tiebreakPoints = tiebreakPointsPlayer1;
+        else if (player == Player.PLAYER_2) tiebreakPoints = tiebreakPointsPlayer2;
+        return tiebreakPoints;
     }
 
     public Player getWinner() {

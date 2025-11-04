@@ -43,6 +43,7 @@ public class Set {
         int difference = Math.abs(player1GamePoints - player2GamePoints);
         checkTieBreak();
         if (tiebreak) {
+            game.tiebreakPointWonBy(player);
             checkTiebreakWinner();
         } else {
             if ((player1GamePoints >= 6 || player2GamePoints >= 6) && difference >= 2) {
@@ -63,8 +64,8 @@ public class Set {
     }
 
     private void checkTiebreakWinner() {
-        int tiebreakPointsPlayer1 = game.getTiebreakPointsPlayer1();
-        int tiebreakPointsPlayer2 = game.getTiebreakPointsPlayer2();
+        int tiebreakPointsPlayer1 = game.getTiebreakPoints(Player.PLAYER_1);
+        int tiebreakPointsPlayer2 = game.getTiebreakPoints(Player.PLAYER_2);
         int difference = Math.abs(tiebreakPointsPlayer1 - tiebreakPointsPlayer2);
         if ((tiebreakPointsPlayer1 >= 7 || tiebreakPointsPlayer2 >= 7) && difference >= 2) {
             if (tiebreakPointsPlayer1 > tiebreakPointsPlayer2) {

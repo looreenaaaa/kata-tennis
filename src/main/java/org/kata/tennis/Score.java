@@ -63,7 +63,7 @@ public class Score {
     }
 
     public void resetScore() {
-        this.scorePlayer1 = 0;
-        this.scorePlayer2 = 0;
+        scorePlayer1 = 0;
+        scorePlayer2 = 0;
     }
 }

@@ -9,7 +9,7 @@ public class MatchWinningTest {
     @Test
     public void matchShouldInitializeCorrectly() {
         Set set = new Set();
-        tennisMatch match = new tennisMatch(set);
+        TennisMatch match = new TennisMatch(set);
 
         assertNull(match.getWinner());
         assertFalse(match.isFinished());
@@ -20,7 +20,7 @@ public class MatchWinningTest {
         Score score = new Score(3,0);
         Game game = new Game(score, 5,4);
         Set set = new Set(2,0, game);
-        tennisMatch match = new tennisMatch(set);
+        TennisMatch match = new TennisMatch(set);
 
         match.setWonBy(Player.PLAYER_1);
 
@@ -33,7 +33,7 @@ public class MatchWinningTest {
         Score score = new Score(0,3);
         Game game = new Game(score, 4,5);
         Set set = new Set(2,2, game);
-        tennisMatch match = new tennisMatch(set);
+        TennisMatch match = new TennisMatch(set);
 
         match.setWonBy(Player.PLAYER_2);
 

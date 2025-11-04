@@ -1,17 +1,17 @@
 package org.kata.tennis;
 
-public class tennisMatch {
+public class TennisMatch {
     private Set set;
     private Player winner;
     private boolean matchFinished;
 
-    public tennisMatch(Set set, Player winner) {
+    public TennisMatch(Set set, Player winner) {
         this.set = set;
         this.winner = winner;
         this.matchFinished = false;
     }
 
-    public tennisMatch(Set set) {
+    public TennisMatch(Set set) {
         this.set = set;
     }
 
