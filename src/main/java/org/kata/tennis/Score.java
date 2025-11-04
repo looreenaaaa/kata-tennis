@@ -5,8 +5,7 @@ public class Score {
     private int scorePlayer2;
 
     public Score() {
-        this.scorePlayer1 = 0;
-        this.scorePlayer2 = 0;
+        this(0,0);
     }
 
     public Score(int scorePlayer1, int scorePlayer2) {
@@ -16,42 +15,42 @@ public class Score {
 
     public void pointWonBy(Player player) {
         if (player == Player.PLAYER_1) scorePlayer1++;
-        else scorePlayer2++;
+        else if (player == Player.PLAYER_2) scorePlayer2++;
     }
 
     @Override
     public String toString() {
-        String result = "";
-        if (isDeucePhase(scorePlayer1, scorePlayer2)) {
-            result = translateDeucePhase(scorePlayer1, scorePlayer2);
-        } else {
-            result = translateSingleScore(scorePlayer1) + "-" + translateSingleScore(scorePlayer2);
-        }
-        return result;
+        return isDeucePhase() ? translateDeucePhase() : translateRegularScore();
     }
 
-    private static String translateSingleScore(int score) {
-        String result = "";
-        if (score == 0) result = "love";
-        else if (score == 1) result = "fifteen";
-        else if (score == 2) result = "thirty";
-        else if (score == 3) result = "forty";
-        return result;
+    private String translateRegularScore() {
+        return translateSingleScore(scorePlayer1) + "-" + translateSingleScore(scorePlayer2);
     }
 
-    private static boolean isDeucePhase(int scorePlayer1, int scorePlayer2) {
+    private String translateSingleScore(int score) {
+        return switch (score) {
+            case 0 -> "love";
+            case 1 -> "fifteen";
+            case 2 -> "thirty";
+            case 3 -> "forty";
+            default -> String.valueOf(score);
+        };
+    }
+
+    private boolean isDeucePhase() {
         return scorePlayer1 >= 3 && scorePlayer2 >= 3;
     }
 
-    private static String translateDeucePhase(int scorePlayer1, int scorePlayer2) {
-        String result = "";
+    private String translateDeucePhase() {
         int scoreDifference = scorePlayer1 - scorePlayer2;
-        if (scoreDifference == 0) result = "deuce";
-        else if (scoreDifference == 1) result = "advantage player 1";
-        else if (scoreDifference == -1) result = "advantage player 2";
-        else if (scoreDifference == 2) result = "player 1 wins";
-        else if (scoreDifference == -2) result = "player 2 wins";
-        return result;
+        return switch (scoreDifference) {
+            case 0 -> "deuce";
+            case 1 -> "advantage player 1";
+            case -1 -> "advantage player 2";
+            case 2 -> "player 1 wins";
+            case -2 -> "player 2 wins";
+            default -> translateRegularScore();
+        };
     }
 
     public int getScorePlayer1() {
